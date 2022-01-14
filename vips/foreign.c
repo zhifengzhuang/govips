@@ -89,6 +89,11 @@ int load_image_buffer(LoadParams *params, void *buf, size_t len,
     vips_object_set(VIPS_OBJECT(OP), NAME, PARAM.value.i, NULL); \
   }
 
+#define MAYBE_SET_DOUBLE(OP, PARAM, NAME)                        \
+  if (PARAM.is_set) {                                            \
+    vips_object_set(VIPS_OBJECT(OP), NAME, PARAM.value.d, NULL); \
+  }
+
 typedef int (*SetLoadOptionsFn)(VipsOperation *operation, LoadParams *params);
 
 int set_jpegload_options(VipsOperation *operation, LoadParams *params) {
